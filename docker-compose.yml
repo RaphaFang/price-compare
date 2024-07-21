@@ -6,3 +6,11 @@ services:
       - "8002:8002"
     volumes:
       - .:/usr/src/app
+      - /home/ubuntu/WH/TDT/secrets:/app/secrets
+
+    environment:
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+
+    # depends_on:
+    #   - redis
+    restart: always

@@ -53,16 +53,14 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Deploy to EC2
-        # env:
-        # SQL_USER: ${{ secrets.SQL_USER }}
-        # SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+        env:
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
             cd /home/ubuntu/WH/pc
 
-            # export SQL_USER=${SQL_USER}
-            # export SQL_PASSWORD=${SQL_PASSWORD}
+            export DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 
             docker compose down
             docker compose up --build -d
