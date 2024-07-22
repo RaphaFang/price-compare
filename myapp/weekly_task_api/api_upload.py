@@ -15,6 +15,6 @@ def upload_task(request):
 
             return Response({"message": "success"}, status=status.HTTP_200_OK)
     except Exception as e:
-            print(f"Error: {str(e)}")
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        print(f"Error: {str(e)}")
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     

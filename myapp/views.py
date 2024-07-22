@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+
+# 這邊是掛靜態網站
 def home(request):
     return render(request, 'pc_project/index.html')
 

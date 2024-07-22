@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# project 是直接全局控制，所以是要引入我在myapp的檔案
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('pc/v1/', include('myapp.pc_urls')),
