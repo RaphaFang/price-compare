@@ -5,6 +5,14 @@
   </head>
   <body>
     <h1>發表一篇圖文</h1>
-    <p>test, test</p>
+    <form action="/task/v1/api/upload" method="post" enctype="multipart/form-data">
+      <label for="text-content">文字內容</label>
+      <input type="text" id="text-content" name="text" placeholder="選擇一張圖片後送出" />
+      <br />
+      <label for="file-upload">圖片檔案</label>
+      <input type="file" id="file-upload" name="pic" />
+      <br />
+      <button type="submit">送出</button>
+    </form>
   </body>
 </html>

@@ -22,5 +22,3 @@ urlpatterns = [
     path('pc/v1/', include('myapp.pc_urls')),
     path('task/v1/', include('myapp.task_urls')),
 ]
-
-
