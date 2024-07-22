@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
-from weekly_task_api import api_upload
+from myapp import views
+from myapp.weekly_task_api import api_upload
 
 urlpatterns = [
     path('w1/', views.w1, name='w1'),
