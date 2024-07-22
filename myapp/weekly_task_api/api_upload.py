@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 import logging
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 @api_view(['POST'])
@@ -11,10 +11,16 @@ def upload_task(request):
     try :
         if request.method == 'POST':
             t = request.data.get('text')
-            p = request.data.get('pic')
-            logger.info(f"Received text: {t}")
-            logger.info("--------")
-            logger.info(f"Received pic: {p}")
+            p = request.FILES.get('pic')
+
+            logger.info(t)
+            if p:
+                logger.info(f"Received pic: {p.name}")
+                # with open(f'uploads/{p.name}', 'wb+') as destination:
+                #     for chunk in p.chunks():
+                #         destination.write(chunk)
+            else:
+                logger.info("No picture uploaded")
 
             return Response({"message": "success"}, status=status.HTTP_200_OK)
     except Exception as e:
