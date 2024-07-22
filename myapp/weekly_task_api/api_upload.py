@@ -1,6 +1,7 @@
-from rest_framework import status
-from rest_framework.response import Response
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
+import aiomysql
+from project.asgi import app
 
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -13,17 +14,34 @@ def upload_task(request):
             t = request.data.get('text')
             p = request.FILES.get('pic')
 
+            async def read_pic():
+                with open("/path/to/your/image.jpg", "rb") as file:
+                    binary_data = file.read()
+
+            async def upload_sql(request,t,p):
+                sql_pool = app.async_sql_pool 
+                async with sql_pool.acquire() as connection:
+                    async with connection.cursor(aiomysql.DictCursor) as cursor:
+                        await cursor.execute("INSERT INTO main_table (text, pic) VALUES (%s, %s);", (t,p,)) 
+
+                        data =  await cursor.fetchone()
+                        return data
+
             logger.info(t)
+
+            # if t:
+            #     data = await upload_sql(request,t,p)
+            # else:
+            #     pass
+            
+
             if p:
                 logger.info(f"Received pic: {p.name}")
-                # with open(f'uploads/{p.name}', 'wb+') as destination:
-                #     for chunk in p.chunks():
-                #         destination.write(chunk)
             else:
                 logger.info("No picture uploaded")
 
-            return Response({"message": "success"}, status=status.HTTP_200_OK)
+            return JsonResponse({"message": "success"}, status=200)
     except Exception as e:
         print(f"Error: {str(e)}")
-        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return JsonResponse({"error": str(e)}, status=500)
     

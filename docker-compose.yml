@@ -10,6 +10,8 @@ services:
 
     environment:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - SQL_USER=${SQL_USER}
+      - SQL_PASSWORD=${SQL_PASSWORD}
 
     # depends_on:
     #   - redis

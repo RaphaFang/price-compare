@@ -55,12 +55,16 @@ jobs:
       - name: Deploy to EC2
         env:
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          SQL_USER: ${{ secrets.SQL_USER }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
 
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
             cd /home/ubuntu/WH/pc
 
             export DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+            export SQL_USER=${SQL_USER}
+            export SQL_PASSWORD=${SQL_PASSWORD}
 
             docker compose down
             docker compose up --build -d
