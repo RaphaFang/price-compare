@@ -1,5 +1,7 @@
 from pathlib import Path
 import os
+import boto3
+from botocore.exceptions import NoCredentialsError
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -71,6 +73,10 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+# S3 相關設定
+S3_BUCKET = os.getenv('AWS_STORAGE_BUCKET_NAME')
+CLOUDFRONT_DOMAIN = os.getenv('CLOUDFRONT_DOMAIN')
+
 
 
 # Password validation
