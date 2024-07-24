@@ -17,7 +17,7 @@ jobs:
       - name: Pull from GitHub on EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
-            cd /home/ubuntu/WH/TDT
+            cd /home/ubuntu/WH/pc
             git checkout main
             git pull origin main
           EOF
@@ -54,7 +54,6 @@ jobs:
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           SQL_USER: ${{ secrets.SQL_USER }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-
           AWS_STORAGE_BUCKET_NAME: ${{ secrets.AWS_STORAGE_BUCKET_NAME }}
           CLOUDFRONT_DOMAIN: ${{ secrets.CLOUDFRONT_DOMAIN }}
           DJANGO_SETTINGS_MODULE: project.settings
