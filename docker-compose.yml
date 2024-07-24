@@ -12,6 +12,7 @@ services:
     volumes:
       - .:/usr/src/app
       - /home/ubuntu/WH/pc/secrets:/app/secrets
+      - /usr/src/app/static:/usr/src/app/static
 
     environment:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
