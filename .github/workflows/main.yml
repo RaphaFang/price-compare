@@ -19,6 +19,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
             cd /home/ubuntu/WH/pc
             git checkout main
+            git reset --hard HEAD
             git pull origin main
           EOF
 
