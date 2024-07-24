@@ -83,6 +83,7 @@ jobs:
             docker compose down
             docker compose up --build -d
 
-            docker compose exec web rm -rf /usr/src/app/staticfiles/
+            # docker compose exec web rm -rf /usr/src/app/staticfiles/
+            docker compose exec web sh -c "rm -rf /usr/src/app/staticfiles/*"
             docker compose exec web python manage.py collectstatic --noinput
           EOF
