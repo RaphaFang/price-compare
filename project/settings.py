@@ -116,9 +116,9 @@ USE_TZ = True
 
 
 # 這是掛載css js的地方，不會影響到admin的 static讀取
-STATIC_URL = '/static/'
+STATIC_URL = '/task/v1/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # 嘗試這個
 
 # Default primary key field type

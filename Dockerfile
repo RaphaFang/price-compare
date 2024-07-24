@@ -9,7 +9,6 @@ ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 
 RUN pip install --no-cache-dir 'requests<2.29.0' 'urllib3<2.0' -r requirements.txt
 
-RUN rm -rf /usr/src/app/static/
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8002
