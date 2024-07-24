@@ -26,20 +26,15 @@ async def download_sql(app):
         return None
 
 class DownloadTask(APIView):
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         return async_to_sync(self.handle_get)(request, *args, **kwargs)
     
     async def handle_get(self, request, *args, **kwargs):
         try:
-            # t = request.data.get('text')
-            # pic = request.FILES.get('pic')
-            # logger.info(t)
-            # if pic:
-            #     logger.info(f"File name: 52 -> {pic.name}")
             data = await download_sql(app)
             if data:
                 # logger.info(f"Data: {data}")
-                return JsonResponse({"status": "success", "message": "download successfully"}, status=200)
+                return JsonResponse({"status": "success","data":data}, status=200)
             else:
                 return JsonResponse({"status": "error", "message": "SQL download failed"}, status=500)
 

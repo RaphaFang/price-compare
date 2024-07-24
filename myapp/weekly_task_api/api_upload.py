@@ -34,10 +34,10 @@ async def upload_sql(app, t, url):
 
 async def upload_s3(pic):
     try:
-        file_name = pic.name
+        file_name = pic.name.replace(' ', '_')
         loop = asyncio.get_running_loop()
         await loop.run_in_executor(None, s3_client.upload_fileobj, pic, settings.S3_BUCKET, file_name)
-        s3_url = f"https://{settings.CLOUDFRONT_DOMAIN}/{file_name}"
+        s3_url = f"{settings.CLOUDFRONT_DOMAIN}/{file_name}"
         return s3_url
     except Exception as e:
         logger.error(f"S3 upload error: {e}")
