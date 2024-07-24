@@ -1,7 +1,7 @@
 from django.urls import path
 from myapp import views
 from myapp.weekly_task_api.api_upload import UploadTask
-from myapp.weekly_task_api import api_upload, api_download
+from myapp.weekly_task_api.api_download import DownloadTask
 
 
 # 這個是處理/task的路由機制
@@ -10,6 +10,5 @@ urlpatterns = [
     # path('api/upload', api_upload.upload_task, name='api_upload'),
 
     path('api/upload', UploadTask.as_view(), name='upload_task'),
-
-    path('api/download', api_download.download_task, name='api_download'),
+    path('api/download', DownloadTask.as_view(), name='api_download'),
 ]

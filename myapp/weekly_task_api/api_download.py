@@ -25,7 +25,7 @@ async def download_sql(app):
         logger.error(f"SQL download error: {e}")
         return None
 
-class UploadTask(APIView):
+class DownloadTask(APIView):
     def post(self, request, *args, **kwargs):
         return async_to_sync(self.handle_get)(request, *args, **kwargs)
     
