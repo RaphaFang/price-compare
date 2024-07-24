@@ -10,12 +10,7 @@ ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 RUN pip install --no-cache-dir 'requests<2.29.0' 'urllib3<2.0' -r requirements.txt
 
 RUN rm -rf /usr/src/app/static/
-ARG DJANGO_SECRET_KEY
-ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
-# RUN python manage.py collectstatic --noinput
-
-RUN DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} python manage.py collectstatic --noinput
-# 在想這邊應該可以刪掉原先就的檔案？不然每次斗案都同一個
+RUN python manage.py collectstatic --noinput
 
 EXPOSE 8002
 
