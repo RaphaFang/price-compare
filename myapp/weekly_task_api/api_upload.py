@@ -49,7 +49,7 @@ class UploadTask(APIView):
     
     async def handle_post(self, request, *args, **kwargs):
         try:
-            t = request.data.get('text')
+            t = str(request.data.get('text'))
             pic = request.FILES.get('pic')
 
             if not t:
@@ -58,10 +58,12 @@ class UploadTask(APIView):
                 mime_type, _ = mimetypes.guess_type(pic.name)
                 if mime_type not in settings.ALLOWED_IMAGE_TYPES:
                     return JsonResponse({"status": "error", "message": "Only jpg/png/gif files are allowed"}, status=400)
-            
-            url = await upload_s3(pic) if pic else None
-            if not url:
-                return JsonResponse({"status": "error", "message": "S3 upload failed"}, status=500)
+                url = await upload_s3(pic) if pic else None
+                if not url:
+                    return JsonResponse({"status": "error", "message": "S3 upload failed"}, status=500)
+            else:
+                url = None
+
             id = await upload_sql(app, t, url)
             if not id:
                 return JsonResponse({"status": "error", "message": "SQL upload failed"}, status=500)

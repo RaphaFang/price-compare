@@ -15,7 +15,7 @@ async def download_sql(app):
         sql_pool = app.state.async_sql_pool
         async with sql_pool.acquire() as connection:
             async with connection.cursor(aiomysql.DictCursor) as cursor:
-                await cursor.execute("SELECT * from main_table;")
+                await cursor.execute("SELECT * FROM main_table ORDER BY created_at DESC LIMIT 10;")
                 data = await cursor.fetchall()
                 return data
             

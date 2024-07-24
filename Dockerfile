@@ -14,6 +14,7 @@ RUN python manage.py collectstatic --noinput
 
 EXPOSE 8002
 
+CMD ["hypercorn", "project.asgi:app", "--bind", "0.0.0.0:8002"]
+
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8002"]
 # CMD [ "uvicorn", "project.asgi:app", "python", "manage.py", "runserver", "0.0.0.0:8002"]
-CMD ["hypercorn", "project.asgi:app", "--bind", "0.0.0.0:8002"]

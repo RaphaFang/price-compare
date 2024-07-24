@@ -44,3 +44,65 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #448899;
 }
+.fetch-download-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fetch-download {
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  width: 400px;
+  padding: 10px;
+  background-color: #448899;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.info-below-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* max-width: 400px;
+  width: auto; */
+  height: auto;
+  flex-direction: column;
+}
+.block {
+  max-width: 442px;
+  width: 100%;
+
+  height: auto;
+
+  border: #448899;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.img-container {
+  width: 100%;
+  display: flex;
+}
+.user-pic {
+  width: 100%;
+  max-height: 300px;
+  height: auto;
+
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.text-div {
+  width: 100%;
+  max-height: 50px;
+  height: auto;
+  text-align: left;
+  padding-left: 35px;
+}
