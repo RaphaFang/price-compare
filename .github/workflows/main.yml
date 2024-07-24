@@ -9,6 +9,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Pull from GitHub on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
+            cd /home/ubuntu/WH/TDT
+            git checkout main
+            git pull origin main
+          EOF
+
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -48,9 +61,6 @@ jobs:
 
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
-            cd /home/ubuntu/WH/pc
-            git checkout main
-            git pull origin main
 
             export DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
             export SQL_USER=${SQL_USER}
