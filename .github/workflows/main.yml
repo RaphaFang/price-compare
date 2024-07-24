@@ -75,15 +75,9 @@ jobs:
             export CLOUDFRONT_DOMAIN=${CLOUDFRONT_DOMAIN}
             export DJANGO_SETTINGS_MODULE=project.settings
 
-            if [ ! -f docker-compose.yml ]; then
-              echo "docker-compose.yml not found"
-              exit 1
-            fi
-
             docker compose down
             docker compose up --build -d
 
-            # docker compose exec web rm -rf /usr/src/app/staticfiles/
             docker compose exec web sh -c "rm -rf /usr/src/app/staticfiles/*"
             docker compose exec web python manage.py collectstatic --noinput
           EOF

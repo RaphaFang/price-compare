@@ -10,7 +10,7 @@ services:
     ports:
       - "8002:8002"
     volumes:
-      # - .:/usr/src/app
+      - /home/ubuntu/WH/pc:/usr/src/app
       - /home/ubuntu/WH/pc/secrets:/app/secrets
       - /home/ubuntu/WH/pc/staticfiles:/usr/src/app/staticfiles
 
