@@ -64,6 +64,9 @@ jobs:
 
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
+            cd /home/ubuntu/WH/pc
+            git reset --hard HEAD
+            git pull origin main
 
             export DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
             export SQL_USER=${SQL_USER}
@@ -71,6 +74,11 @@ jobs:
             export AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
             export CLOUDFRONT_DOMAIN=${CLOUDFRONT_DOMAIN}
             export DJANGO_SETTINGS_MODULE=project.settings
+
+            if [ ! -f docker-compose.yml ]; then
+              echo "docker-compose.yml not found"
+              exit 1
+            fi
 
             docker compose down
             docker compose up --build -d
