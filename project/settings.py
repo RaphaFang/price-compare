@@ -87,7 +87,8 @@ DATABASES = {
 # S3 相關設定
 S3_BUCKET = os.getenv('AWS_STORAGE_BUCKET_NAME')
 CLOUDFRONT_DOMAIN = os.getenv('CLOUDFRONT_DOMAIN')
-
+# 圖片格式設定
+ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif']
 
 
 # Password validation

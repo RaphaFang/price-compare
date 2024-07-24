@@ -9,19 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.7.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Pull from GitHub on EC2
-        run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
-            cd /home/ubuntu/WH/pc
-            git checkout main
-            git pull origin main
-          EOF
-
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -44,9 +31,6 @@ jobs:
     needs: build
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.7.0
         with:
@@ -65,17 +49,16 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
             cd /home/ubuntu/WH/pc
+            git checkout main
+            git pull origin main
 
             export DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
             export SQL_USER=${SQL_USER}
             export SQL_PASSWORD=${SQL_PASSWORD}
-
             export AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
             export CLOUDFRONT_DOMAIN=${CLOUDFRONT_DOMAIN}
-
             export DJANGO_SETTINGS_MODULE=project.settings
 
-            
             docker compose down
             docker compose up --build -d
           EOF

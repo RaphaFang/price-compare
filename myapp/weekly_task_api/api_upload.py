@@ -7,7 +7,7 @@ import logging
 from django.conf import settings
 from project.asgi import app
 from asgiref.sync import async_to_sync
-import os
+import mimetypes
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -51,24 +51,22 @@ class UploadTask(APIView):
         try:
             t = request.data.get('text')
             pic = request.FILES.get('pic')
-            logger.info(t)
-            if pic:
-                logger.info(f"File name: 52 -> {pic.name}")
 
-            if t:
-                url = await upload_s3(pic) if pic else None
-                if url:
-                    id = await upload_sql(app, t, url)
-                    if id:
-                        logger.info(f"Data: {id}")
-                        return JsonResponse({"status": "success", "message": "Upload successfully"}, status=200)
-                    else:
-                        return JsonResponse({"status": "error", "message": "SQL upload failed"}, status=500)
-                else:
-                    return JsonResponse({"status": "error", "message": "S3 upload failed"}, status=500)
-            else:
+            if not t:
                 return JsonResponse({"status": "error", "message": "Must upload at least one piece of msg."}, status=400)
+            if pic:  # 格式檢查
+                mime_type, _ = mimetypes.guess_type(pic.name)
+                if mime_type not in settings.ALLOWED_IMAGE_TYPES:
+                    return JsonResponse({"status": "error", "message": "Only jpg/png/gif files are allowed"}, status=400)
             
+            url = await upload_s3(pic) if pic else None
+            if not url:
+                return JsonResponse({"status": "error", "message": "S3 upload failed"}, status=500)
+            id = await upload_sql(app, t, url)
+            if not id:
+                return JsonResponse({"status": "error", "message": "SQL upload failed"}, status=500)
+            return JsonResponse({"status": "success", "message": "Upload successfully"}, status=200)
+
         except Exception as e:
             logger.error(f"Unexpected error: {e}")
             return JsonResponse({"error": str(e)}, status=500)
