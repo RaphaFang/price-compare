@@ -9,6 +9,6 @@ FLUSH PRIVILEGES;
 CREATE TABLE main_table (
     id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Unique ID',
     text VARCHAR(255) NOT NULL COMMENT 'Upload comment',
-    pic VARCHAR(2048) COMMENT 'Upload pic URL';
+    pic VARCHAR(2048) COMMENT 'Upload pic URL',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Builded time'
 );

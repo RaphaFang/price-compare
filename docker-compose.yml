@@ -1,7 +1,12 @@
 version: "3"
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+    # env_file:
+    #   - .env
     ports:
       - "8002:8002"
     volumes:
@@ -12,9 +17,10 @@ services:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - SQL_USER=${SQL_USER}
       - SQL_PASSWORD=${SQL_PASSWORD}
-
       - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
       - CLOUDFRONT_DOMAIN=${CLOUDFRONT_DOMAIN}
+      - DJANGO_SETTINGS_MODULE=project.settings
+
     # depends_on:
     #   - redis
     restart: always

@@ -5,3 +5,8 @@ pymongo>=3.11.4
 aiomysql
 asyncio
 boto3
+aiohttp
+hypercorn
+starlette
+whitenoise
+anyio

@@ -60,6 +60,8 @@ jobs:
 
           AWS_STORAGE_BUCKET_NAME: ${{ secrets.AWS_STORAGE_BUCKET_NAME }}
           CLOUDFRONT_DOMAIN: ${{ secrets.CLOUDFRONT_DOMAIN }}
+          DJANGO_SETTINGS_MODULE: project.settings
+
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
             cd /home/ubuntu/WH/pc
@@ -70,6 +72,9 @@ jobs:
 
             export AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
             export CLOUDFRONT_DOMAIN=${CLOUDFRONT_DOMAIN}
+
+            export DJANGO_SETTINGS_MODULE=project.settings
+
             
             docker compose down
             docker compose up --build -d
