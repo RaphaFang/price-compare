@@ -8,7 +8,7 @@ from django.conf import settings
 from project.asgi import app
 from asgiref.sync import async_to_sync
 import mimetypes
-import datetime
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
