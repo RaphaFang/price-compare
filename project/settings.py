@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'rest_framework', # 這是在設定他的回應格式，我要的是json
+    'storages',  # 這是增加S3的django-storages
 ]
 
 # 這是在設定他的回應格式，我要的是json
@@ -87,8 +88,26 @@ DATABASES = {
 # S3 相關設定
 S3_BUCKET = os.getenv('AWS_STORAGE_BUCKET_NAME')
 CLOUDFRONT_DOMAIN = os.getenv('CLOUDFRONT_DOMAIN')
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+
+STATIC_LOCATION = 'static'
+STATIC_URL = f'{CLOUDFRONT_DOMAIN}/{STATIC_LOCATION}/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_DEFAULT_ACL = 'public-read'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'myapp/static'),
+]
+
 # 圖片格式設定
 ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif']
+
+# 這是掛載css js的地方，不會影響到admin的 static讀取
+# 目前whitenoise與透過ngnix代理的方式都出問題
+# STATIC_URL = '/task/v1/static/'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# 嘗試這個
 
 
 # Password validation
@@ -112,17 +131,6 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Taipei'
 USE_I18N = True
 USE_TZ = True
-
-
-
-# 這是掛載css js的地方，不會影響到admin的 static讀取
-STATIC_URL = '/task/v1/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'myapp/static'),
-]
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# 嘗試這個
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
