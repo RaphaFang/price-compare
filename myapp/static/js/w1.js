@@ -51,6 +51,8 @@ async function postUpload() {
   } catch (error) {
     console.error("Error:", error);
     alert("Error happened, check the back end.");
+  } finally {
+    submitButton.disabled = false;
   }
 }
 
@@ -69,8 +71,6 @@ async function getDownload() {
     }
   } catch (error) {
     console.error("Error:", error);
-  } finally {
-    submitButton.disabled = false;
   }
 }
 
