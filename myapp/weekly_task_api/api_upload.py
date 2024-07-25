@@ -8,6 +8,7 @@ from django.conf import settings
 from project.asgi import app
 from asgiref.sync import async_to_sync
 import mimetypes
+import datetime
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -34,7 +35,7 @@ async def upload_sql(app, t, url):
 
 async def upload_s3(pic):
     try:
-        file_name = pic.name.replace(' ', '_')
+        file_name = pic.name.replace(' ', '_') + datetime.now().strftime('%Y%m%d%H%M%S%f')
         loop = asyncio.get_running_loop()
         await loop.run_in_executor(None, s3_client.upload_fileobj, pic, settings.AWS_STORAGE_BUCKET_NAME, file_name)
         s3_url = f"{settings.CLOUDFRONT_DOMAIN}/{file_name}"
