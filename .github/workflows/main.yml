@@ -64,6 +64,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+        # 學到一個教訓，把東西寫在一起，我不懂為甚麼一些變數會無法傳遞到下一個run...
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
             cd /home/ubuntu/WH/pc
@@ -82,7 +83,7 @@ jobs:
             docker compose down
             docker compose up --build -d
 
-            pip install awscli
+            pip install --break-system-packages awscli
             aws s3 rm s3://v5-bucket-list/static/ --recursive --exclude "*/"
             docker compose exec web python manage.py collectstatic --noinput
           EOF
