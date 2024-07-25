@@ -6,21 +6,26 @@ document.addEventListener("DOMContentLoaded", async function () {
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/gif"];
 
 async function postUpload() {
+  const submitButton = document.getElementById("submit");
+  submitButton.disabled = true;
   const textContent = document.getElementById("text-content").value;
   const fileUpload = document.getElementById("file-upload").files[0];
 
   if (!textContent) {
     alert("Must upload at least one piece of message.");
+    submitButton.disabled = false;
     return;
   }
   if (fileUpload) {
     if (!ALLOWED_IMAGE_TYPES.includes(fileUpload.type)) {
       alert("Only jpg/png/gif files are allowed");
+      submitButton.disabled = false;
       return;
     }
   }
   if (fileUpload && fileUpload.size > 10 * 1024 * 1024) {
     alert("Please make sure the size of the file is smaller then 10mb.");
+    submitButton.disabled = false;
     return;
   }
 
@@ -64,6 +69,8 @@ async function getDownload() {
     }
   } catch (error) {
     console.error("Error:", error);
+  } finally {
+    submitButton.disabled = false;
   }
 }
 
