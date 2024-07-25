@@ -61,6 +61,8 @@ jobs:
           AWS_STORAGE_BUCKET_NAME: ${{ secrets.AWS_STORAGE_BUCKET_NAME }}
           CLOUDFRONT_DOMAIN: ${{ secrets.CLOUDFRONT_DOMAIN }}
           DJANGO_SETTINGS_MODULE: project.settings
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
@@ -74,6 +76,8 @@ jobs:
             export AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
             export CLOUDFRONT_DOMAIN=${CLOUDFRONT_DOMAIN}
             export DJANGO_SETTINGS_MODULE=project.settings
+            export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
             docker compose down
             docker compose up --build -d

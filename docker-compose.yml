@@ -21,7 +21,8 @@ services:
       - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
       - CLOUDFRONT_DOMAIN=${CLOUDFRONT_DOMAIN}
       - DJANGO_SETTINGS_MODULE=project.settings
-
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     # depends_on:
     #   - redis
     restart: always
