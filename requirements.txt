@@ -6,6 +6,7 @@ boto3
 hypercorn
 starlette
 django-storages
+scrapy
 # whitenoise
 # 未來連接mongo時，這兩個應該有用
 # djongo>=1.3.6

@@ -63,6 +63,7 @@ jobs:
           DJANGO_SETTINGS_MODULE: project.settings
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          EBAY_VERIFICATION_TOKEN: ${{ secrets.EBAY_VERIFICATION_TOKEN }}
 
         # 學到一個教訓，把東西寫在一起，我不懂為甚麼一些變數會無法傳遞到下一個run...
         run: |
@@ -79,6 +80,8 @@ jobs:
             export DJANGO_SETTINGS_MODULE=project.settings
             export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
             export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+            export EBAY_VERIFICATION_TOKEN=${EBAY_VERIFICATION_TOKEN}
+
 
             docker compose down
             docker compose up --build -d

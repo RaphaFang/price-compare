@@ -23,6 +23,8 @@ services:
       - DJANGO_SETTINGS_MODULE=project.settings
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - EBAY_VERIFICATION_TOKEN=${EBAY_VERIFICATION_TOKEN}
+
     # depends_on:
     #   - redis
     restart: always

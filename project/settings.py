@@ -113,6 +113,12 @@ ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif']
 # 嘗試這個
 
 
+# ebay------------------------------------------------
+EBAY_VERIFICATION_TOKEN = os.getenv('EBAY_VERIFICATION_TOKEN')
+
+# --------------------------------------------------------
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
