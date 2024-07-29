@@ -7,3 +7,6 @@ def home(request):
 
 def w1(request):
     return render(request, 'weekly_task/w1.html')
+
+def loading_test(request):
+    return render(request, 'loading_test.html')
