@@ -10,7 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('pc/v1/', include('myapp.pc_urls')),
     path('task/v1/', include('myapp.task_urls')),
-    path('loaderio-55a2eea74ec89c95f0c9f9a4628ecd51.html', views.loading_test, name='loading_test'), 
+    path('loaderio-55a2eea74ec89c95f0c9f9a4628ecd51.txt', views.loading_test, name='loading_test'), 
 
 ]
 

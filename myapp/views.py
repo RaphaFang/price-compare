@@ -9,4 +9,4 @@ def w1(request):
     return render(request, 'weekly_task/w1.html')
 
 def loading_test(request):
-    return render(request, 'weekly_task/loading_test.html')
+    return render(request, 'weekly_task/loading_test.txt')
