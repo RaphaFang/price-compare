@@ -24,6 +24,13 @@ services:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - EBAY_VERIFICATION_TOKEN=${EBAY_VERIFICATION_TOKEN}
+      # ------------------------------------------------------------
+      - EBAY_CLIENT_ID=${EBAY_CLIENT_ID}
+      - EBAY_CLIENT_SECRET=${EBAY_CLIENT_SECRET}
+      # ----------------------------------------------------------------
+      - X_rapidapi_key=${X_rapidapi_key}
+      - X_rapidapi_host=${X_rapidapi_host}
+      # ----------------------------------------------------------------
 
     # depends_on:
     #   - redis
