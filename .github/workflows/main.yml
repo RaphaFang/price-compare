@@ -16,7 +16,9 @@ jobs:
 
       - name: Pull from GitHub on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
+          # ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
+          ssh -o StrictHostKeyChecking=no ubuntu@107.22.64.25 << EOF
+
             cd /home/ubuntu/WH/pc
             git checkout main
             git reset --hard HEAD
@@ -74,7 +76,9 @@ jobs:
 
         # 學到一個教訓，把東西寫在一起，我不懂為甚麼一些變數會無法傳遞到下一個run...
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
+          # ssh -o StrictHostKeyChecking=no ubuntu@52.4.229.207 << EOF
+          ssh -o StrictHostKeyChecking=no ubuntu@107.22.64.25 << EOF
+
             cd /home/ubuntu/WH/pc
             git reset --hard HEAD
             git pull origin main
