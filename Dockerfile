@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir 'requests<2.29.0' 'urllib3<2.0' -r requirements.t
 
 EXPOSE 8002
 
-CMD ["hypercorn", "project.asgi:app", "--bind", "0.0.0.0:8002"]
+CMD ["hypercorn", "project.asgi:app", "--bind", "0.0.0.0:8002", "--workers", "2"]
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8002"]
 # CMD [ "uvicorn", "project.asgi:app", "python", "manage.py", "runserver", "0.0.0.0:8002"]
 
