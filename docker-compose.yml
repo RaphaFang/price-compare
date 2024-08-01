@@ -16,8 +16,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "1.5"
-          memory: 3g
+          # !---------------------
+          cpus: "2"
+          memory: 3.75g
+        # !---------------------
 
     environment:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
