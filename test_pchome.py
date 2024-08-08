@@ -3,7 +3,7 @@
 import requests
 from requests.adapters import HTTPAdapter
 
-def get_item_info(item_id, ):
+def get_item_info(item_id):
     url = f"https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=%E9%8D%B5%E7%9B%A4&page=2&sort=sale/dc"
     url = "https://ecshweb.pchome.com.tw/search/v3.3/all/results?q={}&page={}&sort=sale/dc"
 
